@@ -83,7 +83,7 @@ int multiplication_integer(const int x, const int y) {
     return result;
 }
 
-// returns x / y (brute force)
+// returns x / y (naive)
 int division_integer(const int x, const int y) {
     int dividend = abs(x), divisor = abs(y), quotient = 0, remainder = 0, result = 0, factor = 0;
 
