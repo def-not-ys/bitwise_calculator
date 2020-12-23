@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h> 
-#include "calculator.h"
+#include "arithematics.h"
 
 // rertuns two's complement of x
 int twos_complement(int x) {
