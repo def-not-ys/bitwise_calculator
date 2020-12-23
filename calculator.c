@@ -84,7 +84,7 @@ int multiplication_integer(const int x, const int y) {
 }
 
 // returns x / y (naive)
-int division_integer(const int x, const int y) {
+int division_integer_naive(const int x, const int y) {
     int dividend = abs(x), divisor = abs(y), quotient = 0, remainder = 0, result = 0, factor = 0;
 
     assert(divisor != 0);
@@ -110,3 +110,69 @@ int division_integer(const int x, const int y) {
     return factor;
 }
 
+
+char *int2bin(int a, char *buffer, int buf_size) {
+    buffer += (buf_size - 1);
+
+    for (int i = 31; i >= 0; i--) {
+        *buffer-- = (a & 1) + '0';
+
+        a >>= 1;
+    }
+
+    return buffer;
+}
+
+
+// returns x / y (restoring)
+int division_integer_restoring(const int x, const int y) {
+    int sign = (x & NEGATIVE_MASK) ^ (y & NEGATIVE_MASK);
+    int dividend = 0, divisor = abs(y), quotient = abs(x), result = 0, factor = 0;
+    
+    assert(divisor != 0);
+    
+    // char buffer[33];
+    // buffer[32] = '\0';  
+
+    int n = 32, temp = quotient;
+    while ((temp & 0x80000000) ^ 0x80000000) {
+        temp <<= 1;
+        n = subtraction_integer(n, 1);
+    }
+
+    // printf("n %d\n", n);
+
+    int pos = subtraction_integer(n, 1);
+    int msb_mask = 0x1 << pos;
+    // pos = subtraction_integer(32, pos);
+
+    while (n) {
+        int msb = (quotient & msb_mask) >> pos;      
+
+        quotient <<= 1;
+        dividend <<= 1;
+        dividend |= msb;
+        factor <<= 1;
+
+        result = subtraction_integer(dividend, divisor);
+
+        if (is_zero(result & NEGATIVE_MASK)) {
+            factor |= 1;
+            dividend = result;
+        }
+            
+
+        // int2bin(dividend, buffer, 32);
+        // printf("msb %d \t factor %d \t dividend %s \t result: %d\n", msb, factor, buffer, result);
+
+        n = subtraction_integer(n, 1);
+        
+    }
+
+    if (sign) 
+        factor = twos_complement(factor);
+
+    assert(factor == x / y);
+
+    return factor;
+}
