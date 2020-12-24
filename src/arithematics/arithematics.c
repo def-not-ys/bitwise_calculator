@@ -63,8 +63,8 @@ int subtraction_integer(const int x, const int y) {
     return result;
 }
 
-// returns x * y
-int multiplication_integer(const int x, const int y) {
+// returns x * y (naive)
+int multiplication_integer_naive(const int x, const int y) {
     int result = 0, remain = y;
     int (*func)(int a, int b) = addition_integer;
 
@@ -77,6 +77,27 @@ int multiplication_integer(const int x, const int y) {
         result = func(result, x);
         remain = subtraction_integer(remain, 1);
     }
+
+    assert(result == x * y);
+
+    return result;
+}
+
+
+// retuns x * y (Russian Peasant)
+int multiplication_integer_russian_peasant(const int x, const int y) {
+    int result = 0, m = abs(x), n = abs(y);
+    int sign = (x & NEGATIVE_MASK) ^ (y & NEGATIVE_MASK);   
+
+    while (m) {
+        if (m & 1)
+            result = addition_integer(result, n); 
+        n <<= 1;
+        m >>= 1;
+    }
+
+    if (sign)
+        result = twos_complement(result);
 
     assert(result == x * y);
 

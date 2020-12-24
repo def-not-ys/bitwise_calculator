@@ -1,6 +1,6 @@
 
 CC = g++
-CFLAG = -g -o0 -Wall
+CFLAG = -g -o0 -std=c++11 -Wall 
 
 C_DIR = arithematics/
 CPP_DIR = ui/
