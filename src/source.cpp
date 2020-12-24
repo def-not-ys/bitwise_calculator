@@ -1,32 +1,42 @@
-// #include <stdio.h>
-// #include <stdint.h>
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+#include <ctype.h>
 
 #include "./arithematics/arithematics.h"
 #include "./ui/ui.h"
 
-#include <iostream>
 
+bool isValidMathExpression(std::string input) {
+    return false;
+}
 
 int main() {
 
-    // int sum1 = 50000, sum2 = 20;
+    std::cout << "this is a silly calculator" << std::endl;
 
-    // for (int i = 1; i < 500; i++) {
-    //     if (i & 1) sum1 = multiplication_integer(sum1, i);
-    //     else sum1 = division_integer_naive(sum1, i); 
-
-    //     // printf("sum1 = %d \t i = %d\n", sum1, i);
-    // }
-
-    // printf("sum1 = %d \t sum2 = %d\n", sum1, sum2);
-
-    std::cout << "complied in c++" << std::endl;
-
-    int a = addition_integer(1,2);
+    std::string input = "";
+    int ans = 0;
     
-    std::cout << "caculator : " << a << std::endl;
+    while (true) {
+        std::cin >> input;
+        std::transform(input.begin(), input.end(), input.begin(), 
+                        [](unsigned char c) -> unsigned char {
+                            return std::tolower(c);
+                        });
 
-    std::cout << test() << std::endl;
+        if (isValidMathExpression(input)) 
+            std::cout << "ui.performCalculation(input, ans)" << std::endl;
+        else if (input.compare("quit"))
+            std::cout << "please enter valid math expression" << std::endl;
+        else 
+            break;
+       
+        std::cout << input << std::endl;
+    }
+
+    std::cout << "bye.." << std::endl;
 
     return 0;
 }
