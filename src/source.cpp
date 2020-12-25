@@ -5,12 +5,7 @@
 #include <ctype.h>
 
 #include "./arithematics/arithematics.h"
-#include "./ui/ui.h"
-
-
-bool isValidMathExpression(std::string input) {
-    return false;
-}
+#include "./calculator/calculator.h"
 
 int main() {
 

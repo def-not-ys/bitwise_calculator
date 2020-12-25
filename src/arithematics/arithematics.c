@@ -4,6 +4,7 @@
 
 // rertuns two's complement of x
 int twos_complement(int x) {
+    if (is_zero(x)) return 0;
     int result = addition_integer(~x, 1);
     
     assert(result == -x);
@@ -16,7 +17,7 @@ int compare(const int x, const int y) {
     int check = subtraction_integer(x, y);
     if (check & NEGATIVE_MASK)
         return -1;
-    else if (check ^ ZERO_MASK)
+    else if (check ^ ZERO_MASK)  
         return 1;
     else return 0;
 }
@@ -106,14 +107,14 @@ int multiplication_integer_russian_peasant(const int x, const int y) {
 
 // returns x / y (naive)
 int division_integer_naive(const int x, const int y) {
-    int dividend = abs(x), divisor = abs(y), quotient = 0, remainder = 0, result = 0, factor = 0;
+    int dividend = abs(x), divisor = abs(y), quotient = 0, result = 0, factor = 0;
 
     assert(divisor != 0);
 
     int sign = (x & NEGATIVE_MASK) ^ (y & NEGATIVE_MASK);
     int check = compare(dividend, divisor);
     
-    if (check & NEGATIVE_MASK | is_zero(dividend) | is_zero(check))
+    if ((check & NEGATIVE_MASK) | is_zero(dividend) | is_zero(check))
         factor = quotient;
     else {
         while (check & is_zero(check & NEGATIVE_MASK)) {
@@ -138,36 +139,38 @@ int division_integer_restoring(const int x, const int y) {
     
     assert(divisor != 0);
 
-    int n = 32, temp = quotient;
-    while ((temp & NEGATIVE_MASK) ^ NEGATIVE_MASK) {
-        temp <<= 1;
-        n = subtraction_integer(n, 1);
-    }
-
-    int pos = subtraction_integer(n, 1);
-    int msb_mask = 0x1 << pos;
-
-    while (n) {
-        int msb = (quotient & msb_mask) >> pos;      
-
-        quotient <<= 1;
-        dividend <<= 1;
-        dividend |= msb;
-        factor <<= 1;
-
-        result = subtraction_integer(dividend, divisor);
-
-        if (is_zero(result & NEGATIVE_MASK)) {
-            factor |= 1;
-            dividend = result;
+    if (x) {
+        int n = 32, temp = quotient;
+        while ((temp & NEGATIVE_MASK) ^ NEGATIVE_MASK) {
+            temp <<= 1;
+            n = subtraction_integer(n, 1);
         }
-        n = subtraction_integer(n, 1);
+
+        int pos = subtraction_integer(n, 1);
+        int msb_mask = 0x1 << pos;
+
+        while (n) {
+            int msb = (quotient & msb_mask) >> pos;      
+
+            quotient <<= 1;
+            dividend <<= 1;
+            dividend |= msb;
+            factor <<= 1;
+
+            result = subtraction_integer(dividend, divisor);
+
+            if (is_zero(result & NEGATIVE_MASK)) {
+                factor |= 1;
+                dividend = result;
+            }
+            n = subtraction_integer(n, 1);
+        }
+
+        if (sign) 
+            factor = twos_complement(factor);
     }
-
-    if (sign) 
-        factor = twos_complement(factor);
-
-    assert(factor == x / y);
+    
+    assert(factor == x/y);
 
     return factor;
 }
