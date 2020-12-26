@@ -4,7 +4,6 @@
 
 #include <ctype.h>
 
-#include "./arithematics/arithematics.h"
 #include "./calculator/calculator.h"
 
 int main() {
@@ -12,7 +11,7 @@ int main() {
     std::cout << "this is a silly calculator" << std::endl;
 
     std::string input = "";
-    int ans = 0;
+    Calculator calculator;
     
     while (true) {
         std::cin >> input;
@@ -21,9 +20,7 @@ int main() {
                             return std::tolower(c);
                         });
 
-        if (isValidMathExpression(input)) 
-            std::cout << "ui.performCalculation(input, ans)" << std::endl;
-        else if (input.compare("quit"))
+        if (input.compare("quit"))
             std::cout << "please enter valid math expression" << std::endl;
         else 
             break;
