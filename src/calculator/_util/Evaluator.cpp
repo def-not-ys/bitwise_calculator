@@ -1,28 +1,49 @@
-#include "AST.cpp"
+#include "AST.h"
 
 namespace AST {
-
-    template<typename T>
-    class Evaluator: public Visitor<int> {
+    class Evaluator: public Visitor {
         public:
-            int visit(Expression* node) const {
-                // todo 
+
+            ~Evaluator() {}
+
+            int evaluate(const Expression* node) const {
+                // node->accept(this);
+                std::cout << "evaluating Expression" << std::endl;
+                return 0;
             }
 
-            int visit(Add* node) const {
-                // todo 
+            int evaluate(const Add* node) const {
+                // todo
+                std::cout << "evaluating Add" << std::endl;
+                return 0;
             }
 
-            int visit(Minus* node) const {
-                // todo 
+            int evaluate(const Minus* node) const {
+                // todo
+                std::cout << "evaluating Minus" << std::endl;
+                return 0;
             }
 
-            int visit(Multiply* node) const {
-                // todo 
+            int evaluate(const Multiply* node) const {
+                // todo
+                std::cout << "evaluating Multiply" << std::endl;
+                return 0;
             }
 
-            int visit(Divide* node) const {
-                // todo 
+            int evaluate(const Divide* node) const {
+                // todo
+                std::cout << "evaluating Divide" << std::endl;
+                return 0;
             }
+
+            int test() {
+                return 321;
+            }
+
+            void parse(const Expression* node) const {};
+            void parse(const Add* node) const {};
+            void parse(const Minus* node) const {};
+            void parse(const Multiply* node) const {};
+            void parse(const Divide* node) const {};
     };
 } 

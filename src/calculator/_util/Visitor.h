@@ -5,7 +5,7 @@ namespace AST {
     };
 
     template<typename T>
-    struct Visitor<T> {
+    struct Visitor {
         virtual T visit(Visitable* visitable) const = 0;
     };
 }
