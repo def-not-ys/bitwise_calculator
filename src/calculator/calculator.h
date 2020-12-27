@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "_util/AST.cpp";
+#include "_util/AST.h";
 
 std::string test();
 
@@ -22,6 +22,7 @@ class Calculator {
     private:
         bool _isValidMathExpression(std::string& input); // regex
         int _calculate();
+        void _clear();
 
         int _ans;
         AST::Node _node;

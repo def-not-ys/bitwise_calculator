@@ -1,53 +1,68 @@
-#include "Visitor.h"
+// #include "AST.h"
+
+#include "Parser.cpp"
+#include "Evaluator.cpp"
 
 namespace AST {
-    template<typename T>
-    struct Node: public Visitable<T>{
-        Node();
-        virtual ~Node();         
-        virtual T accept(const Visitor<T>* v) const;
+
+    struct Node {
+        Node() {}
+        virtual ~Node() {};
+        virtual void accept(const Visitor* v) const = 0;         
+        // virtual void accept(const Parser* v) const = 0;
+        // virtual void accept(const Evaluator* v) const = 0;
 
         int _x, _y, _ans;
     };
 
-    template<typename T>
     struct Expression: public Node {
-        // todo
-        T accept(const Visitor<T>* v) const {
-            // stub
+        Expression() {}
+        ~Expression() {
+            // todo
+        };
+        void accept(const Visitor* v) const {
+            v->parse(this);
+            v->evaluate(this);
         }
     };
 
-    template<typename T>
     struct Add: public Node {
-        // todo
-        T accept(const Visitor<T>* v) const {
-            // stub 
-        }
-    };
-
-    template<typename T>
-    struct Minus: public Node {
-        // todo
-        T accept(const Visitor<T>* v) const {
+        Add() {}
+        ~Add() {
+            // todo
+        };
+        void accept(const Visitor* v) const {
             // stub
         }
     };
 
-    template<typename T>
+    struct Minus: public Node {
+        Minus() {}
+        ~Minus() {
+            // todo
+        };
+        void accept(const Visitor* v) const {
+            // stub
+        }
+    };
+
     struct Multiply: public Node {
-        // todo
-        T accept(const Visitor<T>* v) const {
-            // stub 
+        Multiply() {}
+        ~Multiply() {
+            // todo
+        };
+        void accept(const Visitor* v) const {
+            // stub
         }
     };
 
-    template<typename T>
     struct Divide: public Node {
-        // todo
-        T accept(const Visitor<T>* v) const {
-            // stub 
+        Divide() {}
+        ~Divide() {
+            // todo
+        };
+        void accept(const Visitor* v) const {
+            // stub
         }
     };
-
 }
