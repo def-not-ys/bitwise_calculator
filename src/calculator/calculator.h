@@ -1,16 +1,12 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <string>
-
-#include "_util/AST.h";
+#include "_util/AST.h"
 
 std::string test();
 
 class Calculator {
-    public:
-        struct ParseError {};
-
+    
     public:
         Calculator();
         ~Calculator();
@@ -20,12 +16,12 @@ class Calculator {
         int processInput(const std::string& input); // throws ParseError if input is invalid. returns result otherwise
 
     private:
-        bool _isValidMathExpression(std::string& input); // regex
+        // bool _isValidMathExpression(std::string& input); // regex
         int _calculate();
         void _clear();
 
         int _ans;
-        AST::Node _node;
+        AST::Node* _node;
         
 };
 

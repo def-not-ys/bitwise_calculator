@@ -2,16 +2,24 @@
 #define PAER_HEADER
 
 #include "AST.h"
+#include "ParseError.cpp"
 
 namespace AST {
-    struct Parser: public Visitor {
-        void visit(Expression* node) const;
-        void visit(Add* node) const;
-        void visit(Minus* node) const;
-        void visit(Multiply* node) const;
-        void visit(Divide* node) const;
+    class Parser: public Visitor {
+        public:
+            void visit(Expression* node);
+            void visit(Add* node);
+            void visit(Minus* node);
+            void visit(Multiply* node);
+            void visit(Divide* node);
 
-        int test();
+            int test();
+        protected:
+            int _findExpressionsLocation(std::string& str); 
+            int _findRightBracket(std::string &str);
+            int _findFirstTerm(std::string &str);
+            bool _isOperator(const char ch);
+
     };
 }
 

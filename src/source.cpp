@@ -14,7 +14,7 @@ int main() {
     Calculator calculator;
     
     while (true) {
-        std::cin >> input;
+        std::cin >> input; // remove all spaces
         std::transform(input.begin(), input.end(), input.begin(), 
                         [](unsigned char c) -> unsigned char {
                             return std::tolower(c);
