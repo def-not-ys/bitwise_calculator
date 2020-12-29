@@ -6,11 +6,11 @@
 namespace AST {
     class Evaluator: public Visitor {
         public:
-            void visit(Expression* node) const;
-            void visit(Add* node) const;
-            void visit(Minus* node) const;
-            void visit(Multiply* node) const;
-            void visit(Divide* node) const;
+            void visit(Expression* node);
+            void visit(Add* node);
+            void visit(Minus* node);
+            void visit(Multiply* node);
+            void visit(Divide* node);
         // protected:
             int test();
     };
