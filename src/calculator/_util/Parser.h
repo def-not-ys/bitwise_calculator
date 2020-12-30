@@ -13,7 +13,7 @@ namespace AST {
             void visit(Multiply* node);
             void visit(Divide* node);
 
-            int test();
+            int test(); // !!!
         protected:
             int _findExpressionsLocation(std::string& str); 
             int _findRightBracket(std::string &str);
