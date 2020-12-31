@@ -17,6 +17,7 @@ class Calculator {
 
     private:
         // bool _isValidMathExpression(std::string& input); // regex
+        void _format(std::string& str); // removing spaces in the input string 
         int _calculate();
         void _clear();
 
