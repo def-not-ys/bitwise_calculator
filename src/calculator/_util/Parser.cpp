@@ -190,7 +190,7 @@ namespace AST {
                 if (_isNumber(str[i-1]))
                     str.insert(i, "*");
             }	else if (str[i] == ')') {
-                if (str[i+1] > 47 && str[i+1] < 58)
+                if (!_isOperator(str[i+1]))
                     str.insert(i+1, "*");
             }
             i++;
