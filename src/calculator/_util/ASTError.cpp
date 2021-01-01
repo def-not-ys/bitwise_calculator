@@ -1,10 +1,10 @@
 #include <string>
 
 namespace AST {
-    struct ParseError {
+    struct ASTError {
         std::string msg;   
-        ParseError() : msg("error") {};
-        ParseError(std::string m) : msg(m) {};
+        ASTError() : msg("error") {};
+        ASTError(std::string m) : msg(m) {};
         std::string getMessage() { return msg; };
     };
 }

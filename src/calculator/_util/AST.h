@@ -4,6 +4,8 @@
 #include <iostream> // debug only 
 #include <string>
 
+#include "ASTError.cpp"
+
 namespace AST {
 
     struct Visitor;
