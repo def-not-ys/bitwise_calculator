@@ -27,7 +27,8 @@ namespace AST {
         node->_left->accept(this);
         node->_right->accept(this);
 
-        node->_ans = node->_left->_ans + node->_right->_ans; // to be substitued!!
+        // node->_ans = node->_left->_ans + node->_right->_ans; // to be substitued!!
+        node->_ans = addition_integer(node->_left->_ans, node->_right->_ans);
 
         std::cout << "to: " << node->_ans << std::endl;
     }
@@ -38,9 +39,9 @@ namespace AST {
         node->_left->accept(this);
         node->_right->accept(this);
 
-        node->_ans = node->_left->_ans - node->_right->_ans; // to be substitued!!
-
-         std::cout << "to: " << node->_ans << std::endl;
+        // node->_ans = node->_left->_ans - node->_right->_ans; // to be substitued!!
+        node->_ans = subtraction_integer(node->_left->_ans, node->_right->_ans);
+        std::cout << "to: " << node->_ans << std::endl;
     }
 
     void Evaluator::visit(Multiply* node) {
@@ -50,9 +51,10 @@ namespace AST {
         node->_left->accept(this);
         node->_right->accept(this);
 
-        node->_ans = node->_left->_ans * node->_right->_ans; // to be substitued!!
+        // node->_ans = node->_left->_ans * node->_right->_ans; // to be substitued!!
+        node->_ans = multiplication_integer_russian_peasant(node->_left->_ans, node->_right->_ans);
 
-         std::cout << "to: " << node->_ans << std::endl;
+        std::cout << "to: " << node->_ans << std::endl;
     }
 
     void Evaluator::visit(Divide* node) {
@@ -62,8 +64,9 @@ namespace AST {
         node->_left->accept(this);
         node->_right->accept(this);
 
-        node->_ans = node->_left->_ans / node->_right->_ans; // to be substitued!!
+        // node->_ans = node->_left->_ans / node->_right->_ans; // to be substitued!!
+        node->_ans = division_integer_restoring(node->_left->_ans, node->_right->_ans);
 
-         std::cout << "to: " << node->_ans << std::endl;
+        std::cout << "to: " << node->_ans << std::endl;
     }
 } 
