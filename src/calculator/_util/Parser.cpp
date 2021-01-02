@@ -9,16 +9,17 @@ namespace AST {
         Node* next_node = nullptr;
 
         if (_loc < 0) {
+            node->_expression = expr;
             std::cout << "base expression: " << expr << std::endl; // !!!
         } 
-        else if (_loc == expr.length()-1) {
-            next_node = new Expression(expr.substr(0, expr.length()));
+        else if (_loc == expr.length()) {
+            next_node = new Expression(expr);
         }         
         else {
-            Expression* l = new Expression(expr.substr(0,_loc + 1));
-            Expression* r = new Expression(expr.substr(_loc + 2));
-            char op = expr[_loc+1];        
-            
+            Expression* l = new Expression(expr.substr(0,_loc - 1));
+            Expression* r = new Expression(expr.substr(_loc));
+            char op = expr[_loc-1];        
+
             switch (op) {
                 case '+':
                     next_node = new Add(l, r);
@@ -80,34 +81,29 @@ namespace AST {
         std::cout << "prioritized:: " << str << std::endl; //!!!
     }
 
-    int Parser::test() {
-        return 123; // !!!
-    }
-
     int Parser::_findExpressionsLocation(std::string& str) {
-        int _loc = 0, term = 0;
+        int _loc = str.length() - 1, term = 0;
 
-        if (str.length() == 0) 
+        if (_loc < 0) 
             throw ASTError("ParserError::empty string"); 
 
-        if (str[0] == '(') {
-            str.erase(0, 1); 
-            _loc = _findRightBracket(str, 0, str.length()); 
-            if (_loc >= str.length()) _loc = str.length() - 1; 
+        if (str[_loc] == ')') {
+            str.erase(_loc, 1); 
+            _loc = _findLeftBracket(str, 0, str.length()); 
+            if (_loc <= 0) _loc = 0; 
             str.erase(_loc, 1);
-            _loc--;
+            // _loc--;
         }
         else 
-            _loc = _findTermEnd(str, 0);
+            _loc = _findTermStart(str, str.length()-1);
 
-        if (_loc > str.length()-1) {
-            try {
-                term = std::stoi(str);
-                _loc = -1;
-            } catch(std::invalid_argument) {
-                _loc = str.length();
-            }		
-		}
+
+        // std::cout << "_findExpressionsLocation: " << _loc << "\t" << str << std::endl; // !!!
+
+
+        if (_loc <= 0)
+            _loc = _isNumber(str) ? -1 : str.length();
+
         return _loc;
     }
 
@@ -162,7 +158,7 @@ namespace AST {
         int i = 1;
         while (i < str.length()-1) {
             if (str[i] == '(') {
-                if (_isNumber(str[i-1]))
+                if (_isDigit(str[i-1]))
                     str.insert(i, "*");
             }	else if (str[i] == ')') {
                 if (!_isOperator(str[i+1]) && str[i+1] != ')')
@@ -177,7 +173,7 @@ namespace AST {
             int end = i - 2 > 0? i - 2 : 0;
             int loc = _findLeftBracket(str, 0, end);
             str.insert(loc, "(");
-        } else if (_isNumber(str[i-1])) {
+        } else if (_isDigit(str[i-1])) {
             int loc = _findTermStart(str, i-1);
             str.insert(loc, "("); 
         }
@@ -188,7 +184,7 @@ namespace AST {
             int start = i+2 < str.length()-1 ? i + 2 : str.length()-1;  
             int loc = _findRightBracket(str, start, str.length()-1);
             str.insert(loc, ")");
-        } else if (_isNumber(str[i+1])) {
+        } else if (_isDigit(str[i+1])) {
             int loc = _findTermEnd(str, i+1);
             if (loc == str.length()) 
                 str += ")";
@@ -201,7 +197,13 @@ namespace AST {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';
     }
 
-    bool Parser::_isNumber(const char ch) {
+    bool Parser::_isDigit(const char ch) {
 	    return ch > 47 && ch < 58;
+    }
+
+    bool Parser::_isNumber(const std::string str) {
+        auto it = str.begin();
+        while (it != str.end() && _isDigit(*it)) ++it;
+        return it == str.end();
     }
 }

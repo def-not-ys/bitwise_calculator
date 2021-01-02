@@ -66,8 +66,4 @@ namespace AST {
 
          std::cout << "to: " << node->_ans << std::endl;
     }
-
-    int Evaluator::test() {
-        return 321;
-    }
 } 
