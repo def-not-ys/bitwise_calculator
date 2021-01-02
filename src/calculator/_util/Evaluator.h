@@ -11,8 +11,6 @@ namespace AST {
             void visit(Minus* node);
             void visit(Multiply* node);
             void visit(Divide* node);
-        // protected:
-            int test();
     };
 }
 

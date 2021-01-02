@@ -15,7 +15,6 @@ namespace AST {
             // prioritize operation by inserting brackets 
             void prioritize(std::string& str);
 
-            int test(); // !!! for debug 
         protected:
             // returns the location of the end of the expression
             int _findExpressionsLocation(std::string& str); 
@@ -42,7 +41,8 @@ namespace AST {
             void _prioritize_right(std::string& str, int i);
 
             bool _isOperator(const char ch);
-            bool _isNumber(const char ch);
+            bool _isDigit(const char ch);
+            bool _isNumber(const std::string str);
 
     };
 }
