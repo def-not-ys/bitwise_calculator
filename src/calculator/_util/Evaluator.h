@@ -2,6 +2,7 @@
 #define EVALUATOR_HEADER
 
 #include "AST.h"
+#include "../../arithematics/arithematics.h"
 
 namespace AST {
     class Evaluator: public Visitor {

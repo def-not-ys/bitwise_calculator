@@ -97,10 +97,6 @@ namespace AST {
         else 
             _loc = _findTermStart(str, str.length()-1);
 
-
-        // std::cout << "_findExpressionsLocation: " << _loc << "\t" << str << std::endl; // !!!
-
-
         if (_loc <= 0)
             _loc = _isNumber(str) ? -1 : str.length();
 
