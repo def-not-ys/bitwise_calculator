@@ -4,6 +4,11 @@ std::string test() {
     return "hello from ui";
 }
 
+Calculator::Calculator() {};
+
+Calculator::~Calculator() {};
+
+
 // remove spaces in input string
 void Calculator::_format(std::string& str) {
 	int i = 0;

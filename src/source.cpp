@@ -4,7 +4,7 @@
 
 #include <ctype.h>
 
-#include "./calculator/calculator.h"
+#include "./calculator_cpp/calculator.h"
 
 int main() {
 

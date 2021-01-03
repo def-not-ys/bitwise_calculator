@@ -15,7 +15,7 @@ namespace AST {
         virtual ~Node();
         virtual void accept(Visitor* v) = 0;         
 
-        int _x = 0, _y = 0, _ans = 0;
+        int _x, _y, _ans;
     };
 
     struct Expression: public Node {
@@ -24,7 +24,7 @@ namespace AST {
         void accept(Visitor* v);
 
         std::string _expression;
-        Node* _next = nullptr;
+        Node* _next;
     };
 
     struct Add: public Node {
@@ -32,8 +32,8 @@ namespace AST {
         ~Add();
         void accept(Visitor* v);
 
-        Expression* _left = nullptr;
-        Expression* _right = nullptr;
+        Expression* _left;
+        Expression* _right;
     };
 
     struct Minus: public Node {
@@ -41,8 +41,8 @@ namespace AST {
         ~Minus();
         void accept(Visitor* v);
 
-        Expression* _left = nullptr;
-        Expression* _right = nullptr;
+        Expression* _left;
+        Expression* _right;
     };
 
     struct Multiply: public Node {
@@ -50,8 +50,8 @@ namespace AST {
         ~Multiply();
         void accept(Visitor* v);
 
-        Expression* _left = nullptr;
-        Expression* _right = nullptr;
+        Expression* _left;
+        Expression* _right;
     };
 
     struct Divide: public Node {
@@ -59,8 +59,8 @@ namespace AST {
         ~Divide();
         void accept(Visitor* v);
 
-        Expression* _left = nullptr;
-        Expression* _right = nullptr;
+        Expression* _left;
+        Expression* _right;
     };
 
     struct Visitor {
