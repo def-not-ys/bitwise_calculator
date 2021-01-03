@@ -3,8 +3,6 @@
 
 #include "_util/AST.h"
 
-std::string test();
-
 class Calculator {
     
     public:

@@ -4,7 +4,7 @@ namespace AST {
     Node::Node(): _x(0), _y(0), _ans(0) {}
     Node:: ~Node() {}            
 
-    Expression::Expression(std::string exp): _expression(exp) {}
+    Expression::Expression(std::string exp): _expression(exp), _next(0) {}
     Expression::~Expression() {
         if (_next) delete _next;
     }
