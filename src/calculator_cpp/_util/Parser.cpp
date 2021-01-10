@@ -2,6 +2,8 @@
 
 namespace AST {
 
+    Parser::Parser() {}
+
     void Parser::visit(Expression* node) {
         std::string expr = node->_expression;
         int _loc = _findExpressionsLocation(expr);
@@ -12,7 +14,7 @@ namespace AST {
             node->_expression = expr;
             std::cout << "base expression: " << expr << std::endl; // !!!
         } 
-        else if (_loc == expr.length()) {
+        else if (_loc == (int)expr.length()) {
             next_node = new Expression(expr);
         }         
         else {
@@ -65,7 +67,7 @@ namespace AST {
     }
 
     void Parser::prioritize(std::string& str) {
-        int i = 0;
+        unsigned int i = 0;
         if (str.length() < 1 || _isOperator(str[0]))
             str = "0" + str;
         _checkImplicitMultiply(str);
@@ -82,7 +84,7 @@ namespace AST {
     }
 
     int Parser::_findExpressionsLocation(std::string& str) {
-        int _loc = str.length() - 1, term = 0;
+        int _loc = str.length() - 1;
 
         if (_loc < 0) 
             throw ASTError("ParserError::empty string"); 
@@ -106,7 +108,7 @@ namespace AST {
     int Parser::_findRightBracket(const std::string &str, int sub_start, int sub_end) {
         std::string s = str.substr(sub_start, sub_end);
 		int _rb = 1, _loc = 0;
-		while (_rb && _loc < s.length()) {
+		while (_rb && _loc < (int)s.length()) {
             if (s[_loc] == ')' ) 
                     _rb--;
             else if (s[_loc] == '(')
@@ -143,7 +145,7 @@ namespace AST {
     }
 
     int Parser::_findTermEnd(std::string &str, int _loc) {
-		while (_loc++ < str.length()) {
+		while (_loc++ < (int)str.length()) {
 			if (_isOperator(str[_loc])) 
 				break;
 		}
@@ -151,7 +153,7 @@ namespace AST {
     }
 
     void Parser::_checkImplicitMultiply(std::string& str) {
-        int i = 1;
+        unsigned int i = 1;
         while (i < str.length()-1) {
             if (str[i] == '(') {
                 if (_isDigit(str[i-1]))
@@ -177,12 +179,12 @@ namespace AST {
 
     void Parser::_prioritize_right(std::string& str, int i) {
         if (str[i+1] == '(') {
-            int start = i+2 < str.length()-1 ? i + 2 : str.length()-1;  
+            int start = i+2 < (int)str.length()-1 ? i + 2 : (int)str.length()-1;  
             int loc = _findRightBracket(str, start, str.length()-1);
             str.insert(loc, ")");
         } else if (_isDigit(str[i+1])) {
             int loc = _findTermEnd(str, i+1);
-            if (loc == str.length()) 
+            if (loc == (int)str.length()) 
                 str += ")";
             else 
                 str.insert(loc+1, ")");

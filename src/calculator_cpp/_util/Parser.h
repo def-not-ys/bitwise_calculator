@@ -6,6 +6,9 @@
 namespace AST {
     class Parser: public Visitor {
         public:
+
+            Parser();
+
             void visit(Expression* node);
             void visit(Add* node);
             void visit(Minus* node);
