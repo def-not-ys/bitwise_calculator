@@ -1,7 +1,8 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include "_util/AST.h"
+#include "_util/Parser.h"
+#include "_util/Evaluator.h"
 
 class Calculator {
     
@@ -11,16 +12,18 @@ class Calculator {
         Calculator(const Calculator& other) = delete;
         Calculator& operator= (const Calculator& other) = delete;
 
-        int processInput(const std::string& input); // throws ParseError if input is invalid. returns result otherwise
+        int processInput(const std::string& input); // throws ASTError if input is invalid. returns result otherwise
 
     private:
-        // bool _isValidMathExpression(std::string& input); // regex
         void _format(std::string& str); // removing spaces in the input string 
-        int _calculate();
+        void _parse();
+        void _evaluate();
         void _clear();
 
         int _ans;
         AST::Node* _node;
+        AST::Parser* _parser;
+        AST::Evaluator* _evaluator;
         
 };
 
