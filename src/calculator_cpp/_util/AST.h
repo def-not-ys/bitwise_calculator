@@ -64,22 +64,16 @@ namespace AST {
     };
 
     struct Visitor {
-<<<<<<< HEAD
-=======
         virtual ~Visitor() = 0;
->>>>>>> dev
         virtual void visit(Expression* node) = 0;
         virtual void visit(Add* node) = 0;
         virtual void visit(Minus* node) = 0;
         virtual void visit(Multiply* node) = 0;
         virtual void visit(Divide* node) = 0;
     };
-<<<<<<< HEAD
-=======
 
     inline Visitor::~Visitor() { }
 
->>>>>>> dev
 }
 
 #endif
