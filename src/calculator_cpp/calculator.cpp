@@ -1,7 +1,7 @@
 #include "Calculator.h"
 
 
-Calculator::Calculator(): _node(0), _parser(0), _evaluator(0), _ans(0) {}
+Calculator::Calculator():  _ans(0), _node(0), _parser(0), _evaluator(0) {}
 Calculator::~Calculator() {
 	_clear();
 }
@@ -25,7 +25,7 @@ int Calculator::processInput(const std::string& input) {
 
 // remove spaces in input string
 void Calculator::_format(std::string& str) {
-	int i = 0;
+	unsigned int i = 0;
 	while (i < str.length()) {
 		if (str[i] == ' ')
 			str.erase(i, 1);
@@ -42,13 +42,19 @@ void Calculator::_parse() {
 void Calculator::_evaluate() {
 	_evaluator = new AST::Evaluator;
 	_node->accept(_evaluator);
+	_ans = _node->_ans;
 }
 
 void Calculator::_clear() {
 	if (_node) 
 		delete _node;
+	_node = 0;
+
 	if (_parser)
 		delete _parser;
+	_parser = 0;
+
 	if (_evaluator)
 		delete _evaluator;
+	_evaluator = 0;
 }

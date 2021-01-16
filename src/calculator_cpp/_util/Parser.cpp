@@ -2,7 +2,8 @@
 
 namespace AST {
 
-    Parser::Parser() {}
+    // Parser::Parser() {}
+    Parser::~Parser() {}
 
     void Parser::visit(Expression* node) {
         std::string expr = node->_expression;
@@ -12,7 +13,6 @@ namespace AST {
 
         if (_loc < 0) {
             node->_expression = expr;
-            std::cout << "base expression: " << expr << std::endl; // !!!
         } 
         else if (_loc == (int)expr.length()) {
             next_node = new Expression(expr);
@@ -79,8 +79,6 @@ namespace AST {
             }
             i++;
         }
-
-        std::cout << "prioritized:: " << str << std::endl; //!!!
     }
 
     int Parser::_findExpressionsLocation(std::string& str) {
