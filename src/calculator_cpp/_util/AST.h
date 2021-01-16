@@ -12,7 +12,7 @@ namespace AST {
 
     struct Node {
         Node();
-        virtual ~Node();
+        virtual ~Node() = 0;
         virtual void accept(Visitor* v) = 0;         
 
         int _x, _y, _ans;
@@ -64,12 +64,16 @@ namespace AST {
     };
 
     struct Visitor {
+        virtual ~Visitor() = 0;
         virtual void visit(Expression* node) = 0;
         virtual void visit(Add* node) = 0;
         virtual void visit(Minus* node) = 0;
         virtual void visit(Multiply* node) = 0;
         virtual void visit(Divide* node) = 0;
     };
+
+    inline Visitor::~Visitor() { }
+
 }
 
 #endif
