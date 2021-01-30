@@ -2,7 +2,6 @@
 
 namespace AST {
 
-    // Evaluator::Evaluator() {}
     Evaluator::~Evaluator() {}
 
     void Evaluator::visit(Expression* node) {      

@@ -8,7 +8,6 @@ namespace AST {
     class Evaluator: public Visitor {
         public:
 
-            // Evaluator();
             ~Evaluator();
 
             void visit(Expression* node);

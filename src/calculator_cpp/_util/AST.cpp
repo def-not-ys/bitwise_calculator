@@ -1,10 +1,11 @@
 #include "AST.h"
 
 namespace AST {
-    Node::Node(): _x(0), _y(0), _ans(0) {}
+    Node::Node(): _x(0), _y(0), _ans(0), _expression("") {}
+    Node::Node(std::string exp): _x(0), _y(0), _ans(0), _expression(exp) {}
     Node:: ~Node() {}            
 
-    Expression::Expression(std::string exp): _expression(exp), _next(0) {}
+    Expression::Expression(std::string exp): _next(0) { _expression = exp; }
     Expression::~Expression() {
         if (_next) delete _next;
     }

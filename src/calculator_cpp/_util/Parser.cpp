@@ -2,11 +2,15 @@
 
 namespace AST {
 
-    // Parser::Parser() {}
     Parser::~Parser() {}
 
     void Parser::visit(Expression* node) {
         std::string expr = node->_expression;
+
+ #if DEBUG_ON 
+        std::cout << "parsing:: " << expr << std::endl;
+ #endif //DEBUG_ON
+
         int _loc = _findExpressionsLocation(expr);
 
         Node* next_node = nullptr;
@@ -72,6 +76,13 @@ namespace AST {
             str = "0" + str;
         _checkImplicitMultiply(str);
         while (i < str.length()) {
+
+            if (_isInvalid(str[i]))
+                throw ASTError("ParserError::invalid input"); 
+
+            if (i+1 < str.length() && _isOperator(str[i]) && _isOperator(str[i+1]))
+                throw ASTError("ParserError::invalid expression");
+
             if (str[i] == '*' || str[i] == '/') {
                     _prioritize_left(str, i);
                     i++;
@@ -202,4 +213,12 @@ namespace AST {
         while (it != str.end() && _isDigit(*it)) ++it;
         return it == str.end();
     }
+
+    bool Parser::_isInvalid(const char ch) {
+        if (!_isOperator(ch) && !_isDigit(ch) && ch != '(' && ch != ')') 
+            return true;
+        else 
+            return false;
+    }
+
 }

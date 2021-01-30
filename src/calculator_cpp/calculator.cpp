@@ -36,6 +36,7 @@ void Calculator::_format(std::string& str) {
 
 void Calculator::_parse() {
 	_parser = new AST::Parser;
+	_parser->prioritize(_node->_expression);
 	_node->accept(_parser);
 }
 

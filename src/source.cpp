@@ -19,13 +19,16 @@ int main() {
                         [](unsigned char c) -> unsigned char {
                             return std::tolower(c);
                         });
-
-        if (input.compare("quit"))
-            std::cout << "please enter valid math expression" << std::endl;
-        else 
+        if (input.compare("quit")) {
+            try {
+                int result = 0;
+                result = calculator.processInput(input);
+                std::cout << input << " = " << result << std::endl;
+            } catch (AST::ASTError err) {
+                std::cout << err.getMessage() << std::endl;
+            }            
+        } else 
             break;
-       
-        std::cout << input << std::endl;
     }
 
     std::cout << "bye.." << std::endl;
