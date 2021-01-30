@@ -7,7 +7,6 @@ namespace AST {
     class Parser: public Visitor {
         public:
 
-            // Parser();
             ~Parser();
 
             void visit(Expression* node);

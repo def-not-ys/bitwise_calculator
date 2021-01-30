@@ -2,11 +2,15 @@
 
 namespace AST {
 
-    // Parser::Parser() {}
     Parser::~Parser() {}
 
     void Parser::visit(Expression* node) {
         std::string expr = node->_expression;
+
+ #if DEBUG_ON 
+        std::cout << "parsing:: " << expr << std::endl;
+ #endif //DEBUG_ON
+
         int _loc = _findExpressionsLocation(expr);
 
         Node* next_node = nullptr;

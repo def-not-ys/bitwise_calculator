@@ -1,7 +1,9 @@
 #ifndef AST_HEADER
 #define AST_HEADER
 
-#include <iostream> // debug only 
+#define DEBUG_ON 0
+
+#include <iostream> 
 #include <string>
 
 #include "ASTError.cpp"
@@ -12,10 +14,12 @@ namespace AST {
 
     struct Node {
         Node();
+        Node(std::string exp);
         virtual ~Node() = 0;
         virtual void accept(Visitor* v) = 0;         
 
         int _x, _y, _ans;
+        std::string _expression;
     };
 
     struct Expression: public Node {
@@ -23,7 +27,6 @@ namespace AST {
         ~Expression();
         void accept(Visitor* v);
 
-        std::string _expression;
         Node* _next;
     };
 

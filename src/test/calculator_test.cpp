@@ -6,12 +6,12 @@
 
 TEST_CASE("addition", "simple addition test") {
     Calculator calculator;
-    REQUIRE(calculator.processInput("10+2") == 12);
+    REQUIRE(calculator.processInput("10+23") == 33);
 }
 
 TEST_CASE("subtraction", "simple subtraction test") {
     Calculator calculator;
-    REQUIRE(calculator.processInput("10-2") == 8);
+    REQUIRE(calculator.processInput("10-23") == -13);
 }
 
 TEST_CASE("multiplication", "simple multiplication test") {
