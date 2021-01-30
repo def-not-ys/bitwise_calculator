@@ -46,6 +46,7 @@ namespace AST {
             bool _isOperator(const char ch);
             bool _isDigit(const char ch);
             bool _isNumber(const std::string str);
+            bool _isInvalid(const char ch);
 
     };
 }

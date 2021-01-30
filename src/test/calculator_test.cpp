@@ -28,3 +28,32 @@ TEST_CASE("complex", "complex calculator test") {
     Calculator calculator;
     REQUIRE(calculator.processInput("1 + (2+3-4)*5 / (8+8/(5+1)) ") == 1);
 }
+
+TEST_CASE("invalid text", "invalid input text") {
+    Calculator calculator;
+    try {
+        calculator.processInput("this is an invalid string!!");
+        FAIL("Should throw invalid input exception");
+    } catch (AST::ASTError err) {
+        // expected 
+    }
+}
+
+TEST_CASE("invalid expression", "invalid input expression") {
+    Calculator calculator;
+    try {
+        calculator.processInput("5*8+/7+");
+        FAIL("Should throw invalid input exception");
+    } catch (AST::ASTError err) {
+        // expected 
+    }
+}
+
+TEST_CASE("process negative number", "processing negative number") {
+    Calculator calculator;
+    try {
+        REQUIRE(calculator.processInput("6*89/-5") == -106);
+    } catch (AST::ASTError err) {
+        FAIL("Should not throw any error");
+    }
+}
