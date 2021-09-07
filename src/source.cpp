@@ -4,11 +4,11 @@
 
 #include <ctype.h>
 
-#include "./calculator_cpp/calculator.h"
+#include "./calculator_cpp/Calculator.h"
 
 int main() {
 
-    std::cout << "this is a silly calculator" << std::endl;
+    std::cout << "this is a silly calculator, enter expression (e.g. 1+5) or enter 'quit' to quit" << std::endl;
 
     std::string input = "";
     Calculator calculator;
