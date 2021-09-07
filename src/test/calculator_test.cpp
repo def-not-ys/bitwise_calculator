@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "../calculator_cpp/calculator.h"
+#include "../calculator_cpp/Calculator.h"
 
 
 TEST_CASE("addition", "simple addition test") {

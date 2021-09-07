@@ -12,9 +12,9 @@ namespace AST {
             std::string expr = node->_expression;
             try {
                 node->_ans = std::stoi(expr);
-            } catch (std::invalid_argument err) {
+            } catch (std::invalid_argument &err) {
                 throw ASTError("EvaluatorError::invalid argument");
-            } catch (std::out_of_range err) {
+            } catch (std::out_of_range &err) {
                 throw ASTError("EvaluatorError::out of range");
             }
         }

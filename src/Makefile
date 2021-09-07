@@ -11,24 +11,24 @@ HEADER = $(CPP_DIR)Calculator.h $(AST_DIR)Parser.h $(AST_DIR)Evaluator.h $(AST_D
 TARGET = calculator
 
 C_OBJ = arithematics.o
-CPP_OBJ = parser.o evaluator.o AST.o
+CPP_OBJ = Parser.o Evaluator.o AST.o
 
-all: $(CPP_OBJ) calculator.o $(C_OBJ)
-	$(CC) $(CFLAG) $(CPP_OBJ) calculator.o $(C_OBJ) $(HEADER) source.cpp -o $(TARGET)
+all: $(CPP_OBJ) Calculator.o $(C_OBJ)
+	$(CC) $(CFLAG) $(CPP_OBJ) Calculator.o $(C_OBJ) $(HEADER) source.cpp -o $(TARGET)
 
 test_arithematics: $(C_OBJ)
 	$(CC) $(CFLAG) test/arithematics_test.cpp arithematics.o -o test_arithematics
 
-test_calculator: calculator.o $(CPP_OBJ) $(C_OBJ)
-	$(CC) $(CFLAG) test/calculator_test.cpp $(CPP_OBJ) $(C_OBJ) calculator.o -o test_calculator
+test_calculator: Calculator.o $(CPP_OBJ) $(C_OBJ)
+	$(CC) $(CFLAG) test/calculator_test.cpp $(CPP_OBJ) $(C_OBJ) Calculator.o -o test_calculator
 
-calculator.o: $(CPP_OBJ) $(CPP_DIR)Calculator.h
+Calculator.o: $(CPP_OBJ) $(CPP_DIR)Calculator.h
 	$(CC) $(CFLAG) -c $(CPP_DIR)Calculator.cpp
 
-parser.o: $(AST_DIR)Parser.h $(AST_DIR)AST.h
+Parser.o: $(AST_DIR)Parser.h $(AST_DIR)AST.h
 	$(CC) $(CFLAG) -c $(AST_DIR)AST.cpp $(AST_DIR)Parser.cpp
 
-evaluator.o: $(AST_DIR)Evaluator.h $(AST_DIR)AST.h $(C_DIR)arithematics.h
+Evaluator.o: $(AST_DIR)Evaluator.h $(AST_DIR)AST.h $(C_DIR)arithematics.h
 	$(CC) $(CFLAG) -c $(AST_DIR)AST.cpp $(AST_DIR)Evaluator.cpp $(C_DIR)arithematics.c
 
 arithematics.o: $(C_DIR)arithematics.h

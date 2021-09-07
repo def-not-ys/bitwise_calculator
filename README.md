@@ -21,6 +21,34 @@ Some of the limitations and potential improvements:
 * to add modulo operation supporr `%`
 * support for non-integer
 
+## How to run?
+
+1) make sure docker is installed.
+
+2) from the project root directory, build docker image:
+
+```
+$ docker build -t calculator .
+```
+
+3) once the application is built, run docker:
+```
+$ docker run --interactive --tty calculator
+```
+
+example output:
+
+```
+$ docker run --interactive --tty calculator
+this is a silly calculator, enter expression (e.g. 1+5) or enter 'quit' to quit
+8+9
+8+9 = 17
+7*56
+7*56 = 392
+quit
+bye..
+```
+
 ## Other thoughts?
 contributions welcomed :)
 
