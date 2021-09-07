@@ -10,14 +10,14 @@ int Calculator::processInput(const std::string& input) {
 	std::string str = input;
 	_format(str);
 
-	if (str.length() == 0) 
+	if (str.length() == 0)
 		throw AST::ASTError("empty input");
 
 	_node = new AST::Expression(str);
 
 	_parse();
 	_evaluate();
-	_clear();	
+	_clear();
 
 	return _ans;
 }
@@ -29,7 +29,7 @@ void Calculator::_format(std::string& str) {
 	while (i < str.length()) {
 		if (str[i] == ' ')
 			str.erase(i, 1);
-		else 
+		else
 			i++;
 	}
 }
@@ -47,7 +47,7 @@ void Calculator::_evaluate() {
 }
 
 void Calculator::_clear() {
-	if (_node) 
+	if (_node)
 		delete _node;
 	_node = 0;
 

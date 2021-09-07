@@ -15,12 +15,12 @@ namespace AST {
             void visit(Multiply* node);
             void visit(Divide* node);
 
-            // prioritize operation by inserting brackets 
+            // prioritize operation by inserting brackets
             void prioritize(std::string& str);
 
         protected:
             // returns the location of the end of the expression
-            int _findExpressionsLocation(std::string& str); 
+            int _findExpressionsLocation(std::string& str);
 
             // retrusn the position of the matching right bracket
             int _findRightBracket(const std::string &str, int sub_start, int sub_end);

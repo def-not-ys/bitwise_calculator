@@ -3,7 +3,7 @@
 namespace AST {
     Node::Node(): _x(0), _y(0), _ans(0), _expression("") {}
     Node::Node(std::string exp): _x(0), _y(0), _ans(0), _expression(exp) {}
-    Node:: ~Node() {}            
+    Node:: ~Node() {}
 
     Expression::Expression(std::string exp): _next(0) { _expression = exp; }
     Expression::~Expression() {
@@ -26,7 +26,7 @@ namespace AST {
     Minus::Minus(Expression* left, Expression* right) : _left(left), _right(right) {}
     Minus::~Minus() {
         if (_left) delete _left;
-        if (_right) delete _right;   
+        if (_right) delete _right;
     }
     void Minus::accept(Visitor* v) {
         v->visit(this);
@@ -35,7 +35,7 @@ namespace AST {
     Multiply::Multiply(Expression* left, Expression* right) : _left(left), _right(right) {}
     Multiply::~Multiply() {
         if (_left) delete _left;
-        if (_right) delete _right;   
+        if (_right) delete _right;
     }
     void Multiply::accept(Visitor* v) {
         v->visit(this);
@@ -44,7 +44,7 @@ namespace AST {
     Divide::Divide(Expression* left, Expression* right) : _left(left), _right(right) {}
     Divide::~Divide() {
         if (_left) delete _left;
-        if (_right) delete _right;    
+        if (_right) delete _right;
     }
     void Divide::accept(Visitor* v) {
         v->visit(this);

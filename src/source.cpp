@@ -12,10 +12,10 @@ int main() {
 
     std::string input = "";
     Calculator calculator;
-    
+
     while (true) {
         std::cin >> input; // remove all spaces
-        std::transform(input.begin(), input.end(), input.begin(), 
+        std::transform(input.begin(), input.end(), input.begin(),
                         [](unsigned char c) -> unsigned char {
                             return std::tolower(c);
                         });
@@ -26,8 +26,8 @@ int main() {
                 std::cout << input << " = " << result << std::endl;
             } catch (AST::ASTError err) {
                 std::cout << err.getMessage() << std::endl;
-            }            
-        } else 
+            }
+        } else
             break;
     }
 

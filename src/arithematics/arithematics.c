@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include <assert.h> 
+#include <assert.h>
 #include "arithematics.h"
 
 // rertuns two's complement of x
 int twos_complement(int x) {
     if (is_zero(x)) return 0;
     int result = addition_integer(~x, 1);
-    
+
     assert(result == -x);
 
     return result;
@@ -17,16 +17,16 @@ int compare(const int x, const int y) {
     int check = subtraction_integer(x, y);
     if (check & NEGATIVE_MASK)
         return -1;
-    else if (check ^ ZERO_MASK)  
+    else if (check ^ ZERO_MASK)
         return 1;
     else return 0;
 }
 
-// returns the absolute value of x 
+// returns the absolute value of x
 int abs(const int x) {
-    if (x & NEGATIVE_MASK) 
+    if (x & NEGATIVE_MASK)
         return twos_complement(x);
-    else 
+    else
         return x;
 }
 
@@ -34,7 +34,7 @@ int abs(const int x) {
 int is_zero(const int x) {
     if (x ^ 0)
         return 0;
-    else 
+    else
         return 1;
 }
 
@@ -47,7 +47,7 @@ int addition_integer(const int x, const int y) {
     while (carry) {
         int tmp_carry = _xor & carry;
         _xor = _xor ^ carry;
-        carry = tmp_carry << 1;        
+        carry = tmp_carry << 1;
     }
 
     assert(_xor == x + y);
@@ -60,7 +60,7 @@ int subtraction_integer(const int x, const int y) {
     int result = addition_integer(x, twos_complement(y));
 
     assert(result == x - y);
-    
+
     return result;
 }
 
@@ -73,7 +73,7 @@ int multiplication_integer_naive(const int x, const int y) {
         remain = twos_complement(remain);
         func = subtraction_integer;
     }
-    
+
     while (remain) {
         result = func(result, x);
         remain = subtraction_integer(remain, 1);
@@ -88,11 +88,11 @@ int multiplication_integer_naive(const int x, const int y) {
 // retuns x * y (Russian Peasant)
 int multiplication_integer_russian_peasant(const int x, const int y) {
     int result = 0, m = abs(x), n = abs(y);
-    int sign = (x & NEGATIVE_MASK) ^ (y & NEGATIVE_MASK);   
+    int sign = (x & NEGATIVE_MASK) ^ (y & NEGATIVE_MASK);
 
     while (m) {
         if (m & 1)
-            result = addition_integer(result, n); 
+            result = addition_integer(result, n);
         n <<= 1;
         m >>= 1;
     }
@@ -113,7 +113,7 @@ int division_integer_naive(const int x, const int y) {
 
     int sign = (x & NEGATIVE_MASK) ^ (y & NEGATIVE_MASK);
     int check = compare(dividend, divisor);
-    
+
     if ((check & NEGATIVE_MASK) | is_zero(dividend) | is_zero(check))
         factor = quotient;
     else {
@@ -123,7 +123,7 @@ int division_integer_naive(const int x, const int y) {
             check = compare(dividend, result);
         }
         factor = is_zero(check)? factor : subtraction_integer(factor,1);
-        if (sign) 
+        if (sign)
             factor = twos_complement(factor);
     }
 
@@ -136,7 +136,7 @@ int division_integer_naive(const int x, const int y) {
 int division_integer_restoring(const int x, const int y) {
     int sign = (x & NEGATIVE_MASK) ^ (y & NEGATIVE_MASK);
     int dividend = 0, divisor = abs(y), quotient = abs(x), result = 0, factor = 0;
-    
+
     assert(divisor != 0);
 
     if (x) {
@@ -150,7 +150,7 @@ int division_integer_restoring(const int x, const int y) {
         int msb_mask = 0x1 << pos;
 
         while (n) {
-            int msb = (quotient & msb_mask) >> pos;      
+            int msb = (quotient & msb_mask) >> pos;
 
             quotient <<= 1;
             dividend <<= 1;
@@ -166,10 +166,10 @@ int division_integer_restoring(const int x, const int y) {
             n = subtraction_integer(n, 1);
         }
 
-        if (sign) 
+        if (sign)
             factor = twos_complement(factor);
     }
-    
+
     assert(factor == x/y);
 
     return factor;

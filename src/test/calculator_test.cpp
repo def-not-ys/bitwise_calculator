@@ -35,7 +35,7 @@ TEST_CASE("invalid text", "invalid input text") {
         calculator.processInput("this is an invalid string!!");
         FAIL("Should throw invalid input exception");
     } catch (AST::ASTError err) {
-        // expected 
+        // expected
     }
 }
 
@@ -45,7 +45,7 @@ TEST_CASE("invalid expression", "invalid input expression") {
         calculator.processInput("5*8+/7+");
         FAIL("Should throw invalid input exception");
     } catch (AST::ASTError err) {
-        // expected 
+        // expected
     }
 }
 

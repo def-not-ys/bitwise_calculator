@@ -8,7 +8,7 @@ int abs(const int x);
 int is_zero(const int x);
 
 int addition_integer(const int x, const int y);
-int subtraction_integer(const int x, const int y); 
+int subtraction_integer(const int x, const int y);
 int multiplication_integer_naive(const int x, const int y);
 int multiplication_integer_russian_peasant(const int x, const int y);
 int division_integer_naive(const int x, const int y);

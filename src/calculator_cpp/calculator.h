@@ -5,7 +5,7 @@
 #include "_util/Evaluator.h"
 
 class Calculator {
-    
+
     public:
         Calculator();
         ~Calculator();
@@ -15,7 +15,7 @@ class Calculator {
         int processInput(const std::string& input); // throws ASTError if input is invalid. returns result otherwise
 
     private:
-        void _format(std::string& str); // removing spaces in the input string 
+        void _format(std::string& str); // removing spaces in the input string
         void _parse();
         void _evaluate();
         void _clear();
@@ -24,7 +24,7 @@ class Calculator {
         AST::Node* _node;
         AST::Parser* _parser;
         AST::Evaluator* _evaluator;
-        
+
 };
 
 #endif

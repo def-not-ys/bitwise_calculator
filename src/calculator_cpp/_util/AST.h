@@ -3,7 +3,7 @@
 
 #define DEBUG_ON 0
 
-#include <iostream> 
+#include <iostream>
 #include <string>
 
 #include "ASTError.cpp"
@@ -16,7 +16,7 @@ namespace AST {
         Node();
         Node(std::string exp);
         virtual ~Node() = 0;
-        virtual void accept(Visitor* v) = 0;         
+        virtual void accept(Visitor* v) = 0;
 
         int _x, _y, _ans;
         std::string _expression;

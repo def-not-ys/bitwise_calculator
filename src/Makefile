@@ -1,5 +1,5 @@
 CC = g++
-CFLAG = -g -std=c++11 -Wall 
+CFLAG = -g -std=c++11 -Wall
 
 C_DIR = arithematics/
 CPP_DIR = calculator_cpp/
@@ -11,7 +11,7 @@ HEADER = $(CPP_DIR)Calculator.h $(AST_DIR)Parser.h $(AST_DIR)Evaluator.h $(AST_D
 TARGET = calculator
 
 C_OBJ = arithematics.o
-CPP_OBJ = parser.o evaluator.o AST.o 
+CPP_OBJ = parser.o evaluator.o AST.o
 
 all: $(CPP_OBJ) calculator.o $(C_OBJ)
 	$(CC) $(CFLAG) $(CPP_OBJ) calculator.o $(C_OBJ) $(HEADER) source.cpp -o $(TARGET)

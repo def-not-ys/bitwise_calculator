@@ -4,7 +4,7 @@ namespace AST {
 
     Evaluator::~Evaluator() {}
 
-    void Evaluator::visit(Expression* node) {      
+    void Evaluator::visit(Expression* node) {
         if (node->_next) {
             node->_next->accept(this);
             node->_ans = node->_next->_ans;
@@ -16,8 +16,8 @@ namespace AST {
                 throw ASTError("EvaluatorError::invalid argument");
             } catch (std::out_of_range err) {
                 throw ASTError("EvaluatorError::out of range");
-            }            
-        }         
+            }
+        }
     }
 
     void Evaluator::visit(Add* node) {
@@ -48,4 +48,4 @@ namespace AST {
 
         node->_ans = division_integer_restoring(node->_left->_ans, node->_right->_ans);
     }
-} 
+}
