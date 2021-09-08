@@ -31,7 +31,7 @@ Some of the limitations and potential improvements:
 $ docker build -t calculator .
 ```
 
-3) once the application is built, run docker:
+3) once the image is built, run docker:
 ```
 $ docker run --interactive --tty calculator
 ```
