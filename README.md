@@ -50,7 +50,7 @@ bye..
 ```
 
 ## Other thoughts?
-contributions welcomed :)
+contributions welcome :)
 
 
 
